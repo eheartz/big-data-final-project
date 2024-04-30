@@ -1,0 +1,25 @@
+Tasks:
+
+1. Make Git Work --done
+
+2. Find Dataset with 100k Rows of Data --done
+
+3. Connect Python to Neo4J --done
+
+4. Import Data to Neo4J --done
+
+5. Create Relationships for nodes in Neo4J --done, yippee
+
+6. Query the Data in Python and Convert it to CSVs
+6a. Top 15 Most Accident-Prone ZipCodes --done 
+6b. Safest Borough for Pedestrians (least accidents) --done
+6c. Most Dangerous Month of the Year (aggreg the sum of each month's deaths) --done
+6d. Convert to CSV
+
+7. Look into Tableau
+
+8. Create 3 Tableau Visualizations
+
+9. Record Video Showcase
+
+10. Mention what I Liked/Disliked About the Course
