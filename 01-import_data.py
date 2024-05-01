@@ -2,7 +2,8 @@ from neo4j import GraphDatabase
 from db_config import *
 
 driver = get_neo4j_connection()
-csv_file_path =  "file:///Motor_Vehicle_Collisions_-_Crashes_20240429.csv"
+csv_file_path = "file:///Motor_Vehicle_Collisions_-_Crashes_20240429.csv"
+
 
 # init query
 def init_data(tx):
@@ -10,7 +11,7 @@ def init_data(tx):
         f"LOAD CSV WITH HEADERS FROM '{csv_file_path}' AS row "
         "WITH row SKIP 0 LIMIT 300000 "  # Limit to 100k rows.
         "WHERE row.`ZIP CODE` IS NOT NULL "
-        "MERGE (zip:ZipCode {zipcode: row.`ZIP CODE`}) "  
+        "MERGE (zip:ZipCode {zipcode: row.`ZIP CODE`}) "
         "MERGE (date:Date {date: apoc.date.format(apoc.date.parse(row.`CRASH DATE`, 'ms', 'MM/dd/yyyy'), 'ms', 'yyyy-MM-dd')}) "
         "WITH row "
         "WHERE row.BOROUGH IS NOT NULL "
@@ -26,7 +27,7 @@ def init_data(tx):
 def collision_data(tx):
     query = (
         f"LOAD CSV WITH HEADERS FROM '{csv_file_path}' AS row "
-        "WITH row SKIP 0 LIMIT 10000 "
+        "WITH row SKIP 0 LIMIT 100000 "
         "WHERE row.`ZIP CODE` IS NOT NULL "
         "MERGE (collision:Collision {"
         "    crashTime: row.`CRASH TIME`,"
@@ -49,7 +50,6 @@ def collision_data(tx):
     tx.run(query)
 
 
-
 def delete_data(tx):
     query = """
       CALL {
@@ -60,9 +60,9 @@ def delete_data(tx):
 
 
 with driver.session() as session:
-    #results = session.execute_write(delete_data)
+    # results = session.execute_write(delete_data)
     print("I deleted the data")
-    #results = session.execute_write(init_data)
+    # results = session.execute_write(init_data)
     print("I executed the init_data query")
     results = session.execute_write(collision_data)
     print("I executed the collision creation query")

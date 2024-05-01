@@ -14,12 +14,11 @@ Tasks:
 6a. Top 15 Most Accident-Prone ZipCodes --done 
 6b. Safest Borough for Pedestrians (least accidents) --done
 6c. Most Dangerous Month of the Year (aggreg the sum of each month's deaths) --done
-6d. Convert to CSV
+6d. Convert to CSV --done
 
-7. Look into Tableau
+7. Look into Tableau --done
 
-8. Create 3 Tableau Visualizations
+8. Create 3 Tableau Visualizations --done
 
 9. Record Video Showcase
-
-10. Mention what I Liked/Disliked About the Course
+9a. Mention what I Liked/Disliked
