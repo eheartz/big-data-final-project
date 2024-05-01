@@ -11,7 +11,7 @@ def accident_prone_zip_export():
     MATCH (collision:Collision)-[:RECORDED_AT]->(zip:ZipCode)
     WITH zip.zipcode AS zipcode, COUNT(collision) AS numCollisions
     ORDER BY numCollisions DESC
-    LIMIT 15
+    LIMIT 30
     RETURN zipcode, numCollisions
     """
     with driver.session() as session:
@@ -40,13 +40,13 @@ def safest_boroughs_export():
             for record in result:
                 writer.writerow([record['borough'], record['totalPedestriansKilled']])
 
-def deadliest_days_export():
+def deadliest_days_2021_export():
     query = """
     MATCH (collision:Collision)-[:ON_DATE]->(date:Date)
     WITH date.date AS date, 
          SUM(collision.personsKilled + collision.pedestriansKilled + collision.cyclistsKilled + collision.motoristsKilled) AS totalKilled
     ORDER BY totalKilled DESC
-    LIMIT 5
+    LIMIT 10
     RETURN date, totalKilled
     """
     with driver.session() as session:
@@ -59,7 +59,7 @@ def deadliest_days_export():
 
 accident_prone_zip_export()
 safest_boroughs_export()
-deadliest_days_export()
+deadliest_days_2021_export()
 
 
 
