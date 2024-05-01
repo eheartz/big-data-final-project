@@ -66,12 +66,7 @@ with driver.session() as session:
     print("I executed the init_data query")
     results = session.execute_write(collision_data)
     print("I executed the collision creation query")
-    #results = session.execute_write(relationship_data)
 
-
-# Execute the query
-#with driver.session() as session:
-#    session.run(query)
 
 # Close the driver
 driver.close()
