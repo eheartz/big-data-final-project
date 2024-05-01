@@ -1,5 +1,6 @@
 __pycache__
 db_config.py
+data.csv
 Neo4J-Final-Auth-Info.txt
 updates
 release-notes-cache

@@ -40,25 +40,26 @@ def safest_boroughs_export():
             for record in result:
                 writer.writerow([record['borough'], record['totalPedestriansKilled']])
 
-def yearly_deaths_export():
+def deadliest_days_export():
     query = """
-    MATCH (collision:Collision)
-    WITH substring(toString(collision.crashDate), 0, 4) AS year, 
-         SUM(collision.pedestriansKilled + collision.cyclistsKilled + collision.motoristsKilled + collision.personsKilled) AS totalDeaths
-    RETURN year, totalDeaths
-    ORDER BY year DESC
+    MATCH (collision:Collision)-[:ON_DATE]->(date:Date)
+    WITH date.date AS date, 
+         SUM(collision.personsKilled + collision.pedestriansKilled + collision.cyclistsKilled + collision.motoristsKilled) AS totalKilled
+    ORDER BY totalKilled DESC
+    LIMIT 5
+    RETURN date, totalKilled
     """
     with driver.session() as session:
         result = session.run(query)
-        with open('yearly_deaths.csv', 'w', newline='') as file:
+        with open('deadliest_days.csv', 'w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(['Year', 'Total Deaths'])
+            writer.writerow(['Date', 'Total Killed'])
             for record in result:
-                writer.writerow([record['year'], record['totalDeaths']])
+                writer.writerow([record['date'], record['totalKilled']])
 
 accident_prone_zip_export()
 safest_boroughs_export()
-yearly_deaths_export()
+deadliest_days_export()
 
 
 

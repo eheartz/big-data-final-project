@@ -26,7 +26,7 @@ def init_data(tx):
 def collision_data(tx):
     query = (
         f"LOAD CSV WITH HEADERS FROM '{csv_file_path}' AS row "
-        "WITH row SKIP 0 LIMIT 100000 "
+        "WITH row SKIP 0 LIMIT 10000 "
         "WHERE row.`ZIP CODE` IS NOT NULL "
         "MERGE (collision:Collision {"
         "    crashTime: row.`CRASH TIME`,"
@@ -60,9 +60,9 @@ def delete_data(tx):
 
 
 with driver.session() as session:
-    results = session.execute_write(delete_data)
+    #results = session.execute_write(delete_data)
     print("I deleted the data")
-    results = session.execute_write(init_data)
+    #results = session.execute_write(init_data)
     print("I executed the init_data query")
     results = session.execute_write(collision_data)
     print("I executed the collision creation query")
