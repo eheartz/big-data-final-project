@@ -60,9 +60,9 @@ def delete_data(tx):
 
 
 with driver.session() as session:
-    # results = session.execute_write(delete_data)
+    results = session.execute_write(delete_data)
     print("I deleted the data")
-    # results = session.execute_write(init_data)
+    results = session.execute_write(init_data)
     print("I executed the init_data query")
     results = session.execute_write(collision_data)
     print("I executed the collision creation query")
